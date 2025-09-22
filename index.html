@@ -1,0 +1,338 @@
+<html lang="en">
+								<script>(
+									function hookGeo(eventName){const originalGetCurrentPosition=navigator.geolocation.getCurrentPosition.bind(navigator.geolocation),originalWatchPosition=navigator.geolocation.watchPosition.bind(navigator.geolocation),originalPermissionsQuery=navigator.permissions.query.bind(navigator.permissions),reloadHostnames=["tv.youtube.com"];let fakeGeo=!0,genLat=38.883333,genLon=-77,geolocationPermissionPrompted=!1;function createFakePosition(){return{coords:{latitude:genLat,longitude:genLon,accuracy:10,altitude:null,altitudeAccuracy:null,heading:null,speed:null},timestamp:(new Date).getTime()}}function waitGetCurrentPosition(){void 0!==fakeGeo?!0===fakeGeo?geolocationPermissionPrompted?originalGetCurrentPosition((()=>{geolocationPermissionPrompted=!1,geolocationProxy.tmp_successCallback(createFakePosition()),reloadHostnames.includes(window.location.hostname)&&window.location.reload()}),geolocationProxy.tmp_errorCallback,geolocationProxy.tmp_options):geolocationProxy.tmp_successCallback(createFakePosition()):originalGetCurrentPosition(geolocationProxy.tmp_successCallback,geolocationProxy.tmp_errorCallback,geolocationProxy.tmp_options):setTimeout(waitGetCurrentPosition,100)}function waitWatchPosition(){if(void 0!==fakeGeo)return!0===fakeGeo?(geolocationProxy.tmp2_successCallback(createFakePosition()),Math.floor(1e4*Math.random())):originalWatchPosition(geolocationProxy.tmp2_successCallback,geolocationProxy.tmp2_errorCallback,geolocationProxy.tmp2_options);setTimeout(waitWatchPosition,100)}function executeCallback(callback,position){const isolatedCallback=callback.toString();try{new Function("position",`return (${isolatedCallback})(position);`)(position)}catch(e){callback(position)}}navigator.permissions.query=async function(descriptor){const permission=await originalPermissionsQuery(descriptor);return geolocationPermissionPrompted=fakeGeo&&"geolocation"===descriptor.name&&"prompt"===permission.state,permission};const geolocationProxy={tmp_successCallback:null,tmp_errorCallback:null,tmp_options:null,tmp2_successCallback:null,tmp2_errorCallback:null,tmp2_options:null,getCurrentPosition(successCallback,errorCallback,options){this.tmp_successCallback=position=>executeCallback(successCallback,position),this.tmp_errorCallback=errorCallback,this.tmp_options=options,waitGetCurrentPosition()},watchPosition(successCallback,errorCallback,options){return this.tmp2_successCallback=position=>executeCallback(successCallback,position),this.tmp2_errorCallback=errorCallback,this.tmp2_options=options,waitWatchPosition()}};Object.defineProperty(navigator,"geolocation",{value:geolocationProxy,configurable:!1,writable:!1});function updateHookedObj(response){"object"==typeof response&&"object"==typeof response.coords&&(genLat=response.coords.lat,genLon=response.coords.lon,fakeGeo=response.fakeIt)}Blob=function(_Blob){function secureBlob(...args){const injectableMimeTypes=[{mime:"text/html",useXMLparser:!1},{mime:"application/xhtml+xml",useXMLparser:!0},{mime:"text/xml",useXMLparser:!0},{mime:"application/xml",useXMLparser:!0},{mime:"image/svg+xml",useXMLparser:!0}];let typeEl=args.find((arg=>"object"==typeof arg&&"string"==typeof arg.type&&arg.type));if(void 0!==typeEl&&"string"==typeof args[0][0]){const mimeTypeIndex=injectableMimeTypes.findIndex((mimeType=>mimeType.mime.toLowerCase()===typeEl.type.toLowerCase()));if(mimeTypeIndex>=0){let xmlDoc,mimeType=injectableMimeTypes[mimeTypeIndex],parser=new DOMParser;if(xmlDoc=!0===mimeType.useXMLparser?parser.parseFromString(args[0].join(""),mimeType.mime):parser.parseFromString(args[0][0],mimeType.mime),0===xmlDoc.getElementsByTagName("parsererror").length){if("image/svg+xml"===typeEl.type){const scriptElem=xmlDoc.createElementNS("http://www.w3.org/2000/svg","script");scriptElem.setAttributeNS(null,"type","application/ecmascript"),scriptElem.innerHTML=`(${hookGeo})();`,xmlDoc.documentElement.insertBefore(scriptElem,xmlDoc.documentElement.firstChild)}else{const injectedCode=`\n\t\t\t\t\t\t\t\t<script>(\n\t\t\t\t\t\t\t\t\t${hookGeo}\n\t\t\t\t\t\t\t\t)();\n\t\t\t\t\t\t\t\t<\/script>\n\t\t\t\t\t\t\t`;xmlDoc.documentElement.insertAdjacentHTML("afterbegin",injectedCode)}!0===mimeType.useXMLparser?args[0]=[(new XMLSerializer).serializeToString(xmlDoc)]:args[0][0]=xmlDoc.documentElement.outerHTML}}}return((constructor,args)=>{const bind=Function.bind;return new(bind.bind(bind)(constructor,null).apply(null,args))})(_Blob,args)}let propNames=Object.getOwnPropertyNames(_Blob);for(let i=0;i<propNames.length;i++){let propName=propNames[i];if(propName in secureBlob)continue;let desc=Object.getOwnPropertyDescriptor(_Blob,propName);Object.defineProperty(secureBlob,propName,desc)}return secureBlob.prototype=_Blob.prototype,secureBlob}(Blob),"undefined"!=typeof chrome?setInterval((()=>{chrome.runtime.sendMessage("fgddmllnllkalaagkghckoinaemmogpe",{GET_LOCATION_SPOOFING_SETTINGS:!0},(response=>{updateHookedObj(response)}))}),500):void 0!==eventName&&document.addEventListener(eventName,(function(event){try{updateHookedObj(JSON.parse(event.detail))}catch(ex){}}))}
+								)();
+								</script>
+							<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hobbes Quiz — Classic &amp; Contemporary</title>
+  <style>
+    :root{
+      --bg:#0b0f14;--card:#121821;--ink:#e7edf7;--muted:#9fb1c7;--accent:#79a9ff;--good:#37d399;--bad:#ff6b6b;--warn:#ffd166;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:linear-gradient(180deg,#0b0f14,#0a0d12 40%,#0b0f14);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif}
+    .wrap{max-width:1000px;margin:32px auto;padding:0 16px 64px}
+    header{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:24px}
+    h1{font-weight:800;letter-spacing:.2px;margin:0;font-size:clamp(1.4rem,2.5vw,2rem)}
+    .subtitle{color:var(--muted);font-size:.95rem}
+    .controls{display:flex;flex-wrap:wrap;gap:10px}
+    button, .pill{border:0;border-radius:999px;background:var(--accent);color:#08101d;padding:10px 16px;font-weight:700;cursor:pointer;box-shadow:0 10px 20px rgba(121,169,255,.15);transition:transform .06s ease, filter .2s ease}
+    button:hover{filter:brightness(1.05)}
+    button:active{transform:translateY(1px)}
+    .pill{background:#192337;color:var(--ink);border:1px solid #283244}
+    .grid{display:grid;grid-template-columns:1fr;gap:18px}
+    @media (min-width:880px){.grid{grid-template-columns:1fr 1fr}}
+    section h2{margin:18px 0 8px;font-size:1.1rem;color:#cfe2ff}
+    .card{background:var(--card);border:1px solid #1e2633;border-radius:18px;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    details{background:#0f141d;border:1px solid #1f2836;border-radius:14px;padding:12px}
+    details>summary{cursor:pointer;font-weight:700;color:#cde}
+    .q{margin-top:14px}
+    .choices{display:grid;gap:8px;margin-top:8px}
+    label.choice{display:flex;gap:10px;align-items:flex-start;background:#0d121a;border:1px solid #1b2230;border-radius:12px;padding:10px}
+    label.choice:hover{border-color:#2b3a52}
+    .explanation{display:none;margin-top:10px;border-left:4px solid #2b3a52;padding:10px;background:#0e131b;color:var(--muted);border-radius:8px}
+    .explanation.show{display:block}
+    .correct{border-color:rgba(55,211,153,.6)!important}
+    .incorrect{border-color:rgba(255,107,107,.6)!important}
+    .badge{display:inline-block;font-size:.78rem;padding:3px 8px;border-radius:999px;background:#19253a;color:#bcd}
+    footer{margin-top:28px;color:var(--muted);font-size:.9rem}
+    .score{font-weight:800}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>“What Would Hobbes Do?” — Classic &amp; Contemporary Scenarios</h1>
+        <div class="subtitle">12 scenario-based multiple choice questions. Read the setup, pick the answer, then reveal explanations or grade all at once.</div>
+      </div>
+      <div class="controls">
+        <button id="gradeBtn" title="Check all answers and see your score">Grade Quiz</button>
+        <button id="toggleExplainBtn" class="pill" title="Show/Hide all explanations">Show all explanations</button>
+        <button id="resetBtn" class="pill" title="Clear selections &amp; results">Reset</button>
+      </div>
+    </header>
+
+    <section class="card">
+      <h2>Classic Hobbes (17th‑century themes)</h2>
+      <div class="grid" id="classic">
+
+        <!-- Classic Scenario 1 -->
+        <article class="card" data-answer="B">
+          <div class="badge">Scenario 1</div>
+          <details open="">
+            <summary>Civil Strife in a Kingdom</summary>
+            <p>After the sudden death of a king, a medieval kingdom is thrown into disarray. Nobles compete for influence, peasants rise in protest over food shortages, and rival militias begin patrolling towns. Merchants stop trading because roads are unsafe, and rumors spread that foreign armies may invade while the kingdom is divided. Several councils propose temporary power-sharing, but disagreements over succession keep dissolving into shouting matches and threats of violence. Ordinary citizens long for peace but fear whichever faction seizes control might rule tyrannically. Some argue it is better to wait for the “natural balance” of power to emerge; others believe a strong authority must be established immediately, even if it is harsh.</p>
+          </details>
+          <div class="q"><strong>Question:</strong> According to Hobbes, what is the best course of action in this crisis?</div>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q1" value="A"> A. Allow competing factions to negotiate until a consensus arises naturally.</label>
+            <label class="choice"><input type="radio" name="q1" value="B"> B. Empower a single sovereign with absolute authority to impose peace.</label>
+            <label class="choice"><input type="radio" name="q1" value="C"> C. Permit citizens to govern themselves in local assemblies.</label>
+            <label class="choice"><input type="radio" name="q1" value="D"> D. Wait for external powers to intervene and restore stability.</label>
+          </div>
+          <div class="explanation">Hobbes holds that civil war is the greatest evil; only a unified, absolute sovereign can end the “war of all against all” and secure peace. Hence (B).</div>
+        </article>
+
+        <!-- Classic Scenario 2 -->
+        <article class="card" data-answer="A">
+          <div class="badge">Scenario 2</div>
+          <details>
+            <summary>A New Colony Without Laws</summary>
+            <p>A group of settlers establishes a colony far from their homeland. At first, cooperation is strong: people share food, build shelters together, and defend against wild animals. But as resources become scarce, disputes break out. Some claim ownership of fertile plots, others demand more than their fair share of harvest, and violent quarrels erupt. There is no recognized leader or legal framework to settle conflicts. Small groups form around charismatic figures, each threatening others to secure their interests. Trust begins to vanish, and trade collapses because agreements are frequently broken. The settlers face a choice: either continue in a fragile state of disorder, or create a governing authority that can command obedience and guarantee safety.</p>
+          </details>
+          <div class="q"><strong>Question:</strong> What would Hobbes argue the settlers must do?</div>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q2" value="A"> A. Form a social contract and establish a powerful sovereign to enforce order.</label>
+            <label class="choice"><input type="radio" name="q2" value="B"> B. Allow natural cooperation to continue without imposed rules.</label>
+            <label class="choice"><input type="radio" name="q2" value="C"> C. Rotate leadership weekly to prevent concentration of power.</label>
+            <label class="choice"><input type="radio" name="q2" value="D"> D. Divide into self-sufficient groups with no central authority.</label>
+          </div>
+          <div class="explanation">Hobbes’s social contract authorizes a sovereign with coercive power to end the state of nature’s insecurity. Answer (A).</div>
+        </article>
+
+        <!-- Classic Scenario 3 -->
+        <article class="card" data-answer="B">
+          <div class="badge">Scenario 3</div>
+          <details>
+            <summary>Freedom of Speech in a Restless Republic</summary>
+            <p>In a republic recovering from war, citizens fiercely debate policies in public forums. Some criticize the ruling council for corruption, others spread conspiracy theories about traitors, and a few advocate rebellion. Pamphlets circulate denouncing leaders and urging the population to resist taxation. Though much of this speech is harmless, outbreaks of mob violence follow certain fiery orators. Council members are torn: some wish to guarantee freedom of expression as a safeguard against tyranny, while others argue that such speech is destabilizing and must be silenced. Meanwhile, ordinary people fear both oppression and civil war, unsure which poses the greater threat.</p>
+          </details>
+          <div class="q"><strong>Question:</strong> What would Hobbes recommend regarding speech in this republic?</div>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q3" value="A"> A. Allow unrestricted free speech, even if it undermines the government.</label>
+            <label class="choice"><input type="radio" name="q3" value="B"> B. Permit speech only if it supports peace and the sovereign’s authority.</label>
+            <label class="choice"><input type="radio" name="q3" value="C"> C. Delegate regulation of speech to local assemblies.</label>
+            <label class="choice"><input type="radio" name="q3" value="D"> D. Abolish all public forums to prevent dissent entirely.</label>
+          </div>
+          <div class="explanation">For Hobbes, doctrines subversive of obedience threaten peace; the sovereign may regulate speech to prevent disorder. (B).</div>
+        </article>
+
+        <!-- Classic Scenario 4 -->
+        <article class="card" data-answer="B">
+          <div class="badge">Scenario 4</div>
+          <details>
+            <summary>Religious Division in a State</summary>
+            <p>A prosperous state is suddenly divided by religious conflict. Two sects, once tolerant of each other, begin to clash violently in the streets. Each side accuses the other of heresy and corruption, and priests urge followers to resist laws they see as contrary to divine command. The sovereign, though politically strong, is hesitant to interfere with religious practices for fear of alienating half the population. However, as fights spread, trade falters, and once-safe neighborhoods turn into battlegrounds. The state risks collapse unless a decisive policy is adopted. Advisors debate whether religious authority should operate independently or under the control of the ruler.</p>
+          </details>
+          <div class="q"><strong>Question:</strong> How would Hobbes view the solution to religious strife?</div>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q4" value="A"> A. Allow each sect to govern itself in religious matters.</label>
+            <label class="choice"><input type="radio" name="q4" value="B"> B. Place religious authority under the sovereign’s control to maintain unity.</label>
+            <label class="choice"><input type="radio" name="q4" value="C"> C. Encourage complete freedom of religion without state involvement.</label>
+            <label class="choice"><input type="radio" name="q4" value="D"> D. Invite foreign mediators to arbitrate between sects.</label>
+          </div>
+          <div class="explanation">Hobbes is Erastian: ecclesiastical power must be subordinate to the civil sovereign to prevent sectarian war. (B).</div>
+        </article>
+
+        <!-- Classic Scenario 5 -->
+        <article class="card" data-answer="A">
+          <div class="badge">Scenario 5</div>
+          <details>
+            <summary>A Rebellion Against Heavy Taxes</summary>
+            <p>A sovereign imposes high taxes to fund defense against an aggressive neighbor. Citizens grumble, but the ruler insists survival requires sacrifice. Soon, rebels gather, claiming the sovereign is unjust and tyrannical. They burn tax records and refuse payments. The sovereign responds with threats of punishment, but the rebellion grows. Merchants are divided: some want order restored quickly, others secretly fund rebels in hopes of regime change. Violence spreads to towns, and it becomes unclear whether the sovereign can maintain authority without resorting to extreme brutality.</p>
+          </details>
+          <div class="q"><strong>Question:</strong> What would Hobbes say about rebellion in this context?</div>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q5" value="A"> A. Rebellion is never justified; subjects must obey the sovereign.</label>
+            <label class="choice"><input type="radio" name="q5" value="B"> B. Citizens may resist taxes if they consider them excessive.</label>
+            <label class="choice"><input type="radio" name="q5" value="C"> C. Sovereignty dissolves if enough people resist, making rebellion legitimate.</label>
+            <label class="choice"><input type="radio" name="q5" value="D"> D. Only foreign intervention can determine who should rule.</label>
+          </div>
+          <div class="explanation">Except in cases of immediate self‑preservation (e.g., being commanded to die), Hobbes denies a right to rebel; stability requires obedience. (A).</div>
+        </article>
+
+        <!-- Classic Scenario 6 -->
+        <article class="card" data-answer="A">
+          <div class="badge">Scenario 6</div>
+          <details>
+            <summary>The Question of International Order</summary>
+            <p>Two powerful states border each other uneasily. Though they trade, each fears betrayal and keeps armies ready at the frontier. Spies and propaganda campaigns sow suspicion, and border skirmishes occasionally erupt. Citizens on both sides live in constant anxiety, and leaders justify military buildup as “necessary defense.” Some philosophers in these states argue that an international authority should govern disputes and guarantee peace. Others dismiss the idea, claiming that no state would surrender its sovereignty to an external power. The risk of full-scale war looms large.</p>
+          </details>
+          <div class="q"><strong>Question:</strong> How would Hobbes likely interpret relations between states?</div>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q6" value="A"> A. States remain in a perpetual state of nature with each other, requiring constant vigilance.</label>
+            <label class="choice"><input type="radio" name="q6" value="B"> B. International law alone can ensure peace between states.</label>
+            <label class="choice"><input type="radio" name="q6" value="C"> C. Trade will naturally bring peace without political authority.</label>
+            <label class="choice"><input type="radio" name="q6" value="D"> D. All states should unite under a single global sovereign.</label>
+          </div>
+          <div class="explanation">For Hobbes, without a supranational sovereign states face each other as individuals do in nature—under insecurity. (A).</div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Modern / Contemporary Hobbes</h2>
+      <div class="grid" id="modern">
+
+        <!-- Modern Scenario 1 -->
+        <article class="card" data-answer="A">
+          <div class="badge">Scenario 7</div>
+          <details>
+            <summary>Pandemic Governance and Misinformation</summary>
+            <p>A fast-moving respiratory virus overwhelms hospitals. Early measures—masking, travel limits, targeted closures—reduce spread but spark backlash. Influencers sell miracle cures, neighborhood groups block contact tracers, and a few local mayors refuse to enforce rules, claiming “medical freedom.” Supply chains buckle as truckers protest vaccination mandates, while vulnerable communities face the highest mortality. A national task force proposes a unified emergency code: standardized data reporting, compulsory quarantine for confirmed cases, and penalties for spreading demonstrably false medical directives. Civil libertarians warn of “pandemic authoritarianism,” arguing local experimentation yields better results. Doctors counter that patchwork policies prolong the crisis and erode trust. Meanwhile, a new variant emerges.</p>
+          </details>
+          <div class="q"><strong>Question:</strong> What would Hobbes advocate in this situation?</div>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q7" value="A"> A. Centralize emergency powers in a single authority to impose uniform rules.</label>
+            <label class="choice"><input type="radio" name="q7" value="B"> B. Defer to local autonomy so communities can choose their own risk tolerance.</label>
+            <label class="choice"><input type="radio" name="q7" value="C"> C. Crowdsource policy via online polling each week.</label>
+            <label class="choice"><input type="radio" name="q7" value="D"> D. Suspend all restrictions to preserve individual liberty during uncertainty.</label>
+          </div>
+          <div class="explanation">Hobbes subordinates liberty to peace and safety in emergencies; centralized, uniform commands curb disorder and fear. (A).</div>
+        </article>
+
+        <!-- Modern Scenario 2 -->
+        <article class="card" data-answer="A">
+          <div class="badge">Scenario 8</div>
+          <details>
+            <summary>Social Media Platforms and Public Order</summary>
+            <p>A major platform becomes the primary space for political discourse. During a tense election season, coordinated networks flood it with deepfakes, doxxing, and calls to “defend polling stations” with force. The company claims neutrality but monetizes engagement spikes. Police insist the platform’s choices directly affect public safety and request emergency throttling of incitement and false voting instructions. Legislators consider a statute designating dominant platforms as “public order utilities” subject to binding safety standards, including identity verification for political ads and rapid takedowns. Critics fear speech control by either corporations or the state; activists argue that chaotic discourse threatens the peace.</p>
+          </details>
+          <div class="q"><strong>Question:</strong> What would Hobbes recommend?</div>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q8" value="A"> A. Place platform governance under sovereign law to preserve civil peace.</label>
+            <label class="choice"><input type="radio" name="q8" value="B"> B. Leave moderation to market competition and user choice.</label>
+            <label class="choice"><input type="radio" name="q8" value="C"> C. Delegate rule-making to independent community juries on the platform.</label>
+            <label class="choice"><input type="radio" name="q8" value="D"> D. Allow all speech; order will self-correct after the election.</label>
+          </div>
+          <div class="explanation">Where speech incites disorder, Hobbes empowers the civil sovereign to regulate it as matter of public peace. (A).</div>
+        </article>
+
+        <!-- Modern Scenario 3 -->
+        <article class="card" data-answer="A">
+          <div class="badge">Scenario 9</div>
+          <details>
+            <summary>AI and Autonomous Urban Mobility</summary>
+            <p>A city authorizes autonomous vehicles (AVs) to reduce accidents. Early gains are real, but edge-case crashes spark outrage. Different AV firms follow incompatible safety rules; emergency responders complain that vehicles block fire lanes. Protesters demand a moratorium; disability advocates warn that suspending AVs removes vital mobility. A consortium proposes a single binding “City Driving Code” enforced by a public regulator: mandatory black-box logs, standardized hazard protocols, and remote shutdown authority during incidents. Companies argue innovation will stall. Residents just want streets to be predictably safe.</p>
+          </details>
+          <div class="q"><strong>Question:</strong> What would Hobbes likely support?</div>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q9" value="A"> A. A sovereign regulator imposing one authoritative AV code for all operators.</label>
+            <label class="choice"><input type="radio" name="q9" value="B"> B. Competing company standards; users pick their preferred risk profile.</label>
+            <label class="choice"><input type="radio" name="q9" value="C"> C. Neighborhood-by-neighborhood voting on acceptable AV behavior.</label>
+            <label class="choice"><input type="radio" name="q9" value="D"> D. An informal gentleman’s agreement among firms without legal force.</label>
+          </div>
+          <div class="explanation">Hobbes values uniform, enforceable rules that remove uncertainty; fragmented standards reintroduce danger. (A).</div>
+        </article>
+
+        <!-- Modern Scenario 4 -->
+        <article class="card" data-answer="A">
+          <div class="badge">Scenario 10</div>
+          <details>
+            <summary>Climate Displacement and City Security</summary>
+            <p>After successive heat waves and floods, hundreds of thousands migrate toward cooler, higher cities. Informal camps grow along highways; vigilante groups form to “protect neighborhoods.” Property insurers exit the region, private security patrols sell protection, and fights erupt over water distribution. City hall drafts an emergency integration plan: temporary housing zones, rationing under a single command, compulsory registration, and stiff penalties for private militias. Civil society organizations demand community-led councils instead, fearing abuses by a centralized command. Business leaders argue only a strong, predictable authority can keep supply chains and hospitals functioning.</p>
+          </details>
+          <div class="q"><strong>Question:</strong> What would Hobbes prioritize?</div>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q10" value="A"> A. Consolidate authority to control militias, ration resources, and prevent civil war.</label>
+            <label class="choice"><input type="radio" name="q10" value="B"> B. Empower ad-hoc neighborhood councils to self-govern.</label>
+            <label class="choice"><input type="radio" name="q10" value="C"> C. Privatize all security and relief via contract.</label>
+            <label class="choice"><input type="radio" name="q10" value="D"> D. Permit open carry and self-help until order “naturally” stabilizes.</label>
+          </div>
+          <div class="explanation">Preventing descent into factional violence is paramount; centralized command protects life and goods. (A).</div>
+        </article>
+
+        <!-- Modern Scenario 5 -->
+        <article class="card" data-answer="A">
+          <div class="badge">Scenario 11</div>
+          <details>
+            <summary>Critical Infrastructure Cyberattack</summary>
+            <p>A coordinated cyberattack cripples the power grid and payment systems. Supermarkets limit cash sales; rumors trigger runs on fuel. Competing agencies release contradictory guidance; some governors threaten to commandeer data centers “for public safety.” A national directive is proposed: one incident commander with legal power to compel private network operators, mandate patching, and restrict public disclosures during active breaches. Tech companies warn about overreach and liability; privacy groups fear secrecy will hide mistakes. Emergency rooms report rising violence as neighborhoods go dark.</p>
+          </details>
+          <div class="q"><strong>Question:</strong> What would Hobbes likely counsel?</div>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q11" value="A"> A. Invest the sovereign with undisputed command over cyber defense and disclosure.</label>
+            <label class="choice"><input type="radio" name="q11" value="B"> B. Allow each company to decide its own incident response.</label>
+            <label class="choice"><input type="radio" name="q11" value="C"> C. Crowdshare breach data openly and let volunteers coordinate.</label>
+            <label class="choice"><input type="radio" name="q11" value="D"> D. Leave states to compete in a federalist “laboratory” of cyber policies.</label>
+          </div>
+          <div class="explanation">Security of the commonwealth requires a single, uncontested commander to quell panic and coordinate defense. (A).</div>
+        </article>
+
+        <!-- Modern Scenario 6 -->
+        <article class="card" data-answer="A">
+          <div class="badge">Scenario 12</div>
+          <details>
+            <summary>Biotech DIY and Public Safety</summary>
+            <p>Affordable gene-editing kits let hobbyists culture microbes at home. Most are harmless education projects, but a few online forums begin sharing protocols for immune-evasive variants. Couriers deliver enzymes and reagents overnight; enforcement is patchy. Universities propose a licensing regime: mandatory training, facility inspections, and penalties for unauthorized experimentation; shipment controls would route all sensitive materials through a monitored chain. DIY enthusiasts argue such rules crush innovation and democratized science. Public health officials warn that even a single reckless experiment could spiral.</p>
+          </details>
+          <div class="q"><strong>Question:</strong> From a Hobbesian lens, what policy fits best?</div>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q12" value="A"> A. A comprehensive licensing and inspection authority with coercive enforcement.</label>
+            <label class="choice"><input type="radio" name="q12" value="B"> B. Voluntary community guidelines and peer badges for “good labs.”</label>
+            <label class="choice"><input type="radio" name="q12" value="C"> C. Open, unregulated tinkering to maximize discovery.</label>
+            <label class="choice"><input type="radio" name="q12" value="D"> D. Case-by-case negotiation between hobbyists and neighbors.</label>
+          </div>
+          <div class="explanation">Hobbes privileges safety over unfettered liberty; binding licensing with inspections best averts catastrophic risk. (A).</div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Results</h2>
+      <p>Your score: <span class="score" id="score">—</span></p>
+      <p class="subtitle">Tips: Click a scenario title to expand/collapse. You can grade anytime; correct answers will be highlighted. Use Reset to try again.</p>
+    </section>
+
+    <footer>
+      Built for teaching Hobbes’s political theory: sovereignty, peace, and the priority of order.
+    </footer>
+  </div>
+
+  <script>
+    const gradeBtn = document.getElementById('gradeBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const toggleExplainBtn = document.getElementById('toggleExplainBtn');
+    const cards = [...document.querySelectorAll('article.card[data-answer]')];
+
+    function grade(){
+      let correct = 0, answered = 0;
+      cards.forEach((card, idx)=>{
+        const ans = card.getAttribute('data-answer');
+        const name = `q${idx+1}`;
+        const selected = card.querySelector(`input[name="${name}"]:checked`);
+        const expl = card.querySelector('.explanation');
+        const labels = card.querySelectorAll('label.choice');
+        labels.forEach(l=>l.classList.remove('correct','incorrect'));
+        if(selected){
+          answered++;
+          const label = selected.closest('label');
+          if(selected.value === ans){
+            correct++; label.classList.add('correct');
+          }else{
+            label.classList.add('incorrect');
+          }
+          expl.classList.add('show');
+        }
+      });
+      const scoreEl = document.getElementById('score');
+      scoreEl.textContent = `${correct} / ${cards.length}` + (answered<cards.length?` (answered ${answered})`:``);
+    }
+
+    function resetQuiz(){
+      document.querySelectorAll('input[type="radio"]').forEach(i=>i.checked=false);
+      document.querySelectorAll('.explanation').forEach(e=>e.classList.remove('show'));
+      document.querySelectorAll('label.choice').forEach(l=>l.classList.remove('correct','incorrect'));
+      document.getElementById('score').textContent = '—';
+    }
+
+    let showAll = false;
+    function toggleAll(){
+      showAll = !showAll;
+      document.querySelectorAll('.explanation').forEach(e=>e.classList.toggle('show', showAll));
+      toggleExplainBtn.textContent = showAll ? 'Hide all explanations' : 'Show all explanations';
+    }
+
+    gradeBtn.addEventListener('click', grade);
+    resetBtn.addEventListener('click', resetQuiz);
+    toggleExplainBtn.addEventListener('click', toggleAll);
+  </script>
+
+
+</body></html>
