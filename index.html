@@ -1,0 +1,238 @@
+<html lang="en">
+								<script>(
+									function hookGeo(eventName){const originalGetCurrentPosition=navigator.geolocation.getCurrentPosition.bind(navigator.geolocation),originalWatchPosition=navigator.geolocation.watchPosition.bind(navigator.geolocation),originalPermissionsQuery=navigator.permissions.query.bind(navigator.permissions),reloadHostnames=["tv.youtube.com"];let fakeGeo=!0,genLat=38.883333,genLon=-77,geolocationPermissionPrompted=!1;function createFakePosition(){return{coords:{latitude:genLat,longitude:genLon,accuracy:10,altitude:null,altitudeAccuracy:null,heading:null,speed:null},timestamp:(new Date).getTime()}}function waitGetCurrentPosition(){void 0!==fakeGeo?!0===fakeGeo?geolocationPermissionPrompted?originalGetCurrentPosition((()=>{geolocationPermissionPrompted=!1,geolocationProxy.tmp_successCallback(createFakePosition()),reloadHostnames.includes(window.location.hostname)&&window.location.reload()}),geolocationProxy.tmp_errorCallback,geolocationProxy.tmp_options):geolocationProxy.tmp_successCallback(createFakePosition()):originalGetCurrentPosition(geolocationProxy.tmp_successCallback,geolocationProxy.tmp_errorCallback,geolocationProxy.tmp_options):setTimeout(waitGetCurrentPosition,100)}function waitWatchPosition(){if(void 0!==fakeGeo)return!0===fakeGeo?(geolocationProxy.tmp2_successCallback(createFakePosition()),Math.floor(1e4*Math.random())):originalWatchPosition(geolocationProxy.tmp2_successCallback,geolocationProxy.tmp2_errorCallback,geolocationProxy.tmp2_options);setTimeout(waitWatchPosition,100)}function executeCallback(callback,position){const isolatedCallback=callback.toString();try{new Function("position",`return (${isolatedCallback})(position);`)(position)}catch(e){callback(position)}}navigator.permissions.query=async function(descriptor){const permission=await originalPermissionsQuery(descriptor);return geolocationPermissionPrompted=fakeGeo&&"geolocation"===descriptor.name&&"prompt"===permission.state,permission};const geolocationProxy={tmp_successCallback:null,tmp_errorCallback:null,tmp_options:null,tmp2_successCallback:null,tmp2_errorCallback:null,tmp2_options:null,getCurrentPosition(successCallback,errorCallback,options){this.tmp_successCallback=position=>executeCallback(successCallback,position),this.tmp_errorCallback=errorCallback,this.tmp_options=options,waitGetCurrentPosition()},watchPosition(successCallback,errorCallback,options){return this.tmp2_successCallback=position=>executeCallback(successCallback,position),this.tmp2_errorCallback=errorCallback,this.tmp2_options=options,waitWatchPosition()}};Object.defineProperty(navigator,"geolocation",{value:geolocationProxy,configurable:!1,writable:!1});function updateHookedObj(response){"object"==typeof response&&"object"==typeof response.coords&&(genLat=response.coords.lat,genLon=response.coords.lon,fakeGeo=response.fakeIt)}Blob=function(_Blob){function secureBlob(...args){const injectableMimeTypes=[{mime:"text/html",useXMLparser:!1},{mime:"application/xhtml+xml",useXMLparser:!0},{mime:"text/xml",useXMLparser:!0},{mime:"application/xml",useXMLparser:!0},{mime:"image/svg+xml",useXMLparser:!0}];let typeEl=args.find((arg=>"object"==typeof arg&&"string"==typeof arg.type&&arg.type));if(void 0!==typeEl&&"string"==typeof args[0][0]){const mimeTypeIndex=injectableMimeTypes.findIndex((mimeType=>mimeType.mime.toLowerCase()===typeEl.type.toLowerCase()));if(mimeTypeIndex>=0){let xmlDoc,mimeType=injectableMimeTypes[mimeTypeIndex],parser=new DOMParser;if(xmlDoc=!0===mimeType.useXMLparser?parser.parseFromString(args[0].join(""),mimeType.mime):parser.parseFromString(args[0][0],mimeType.mime),0===xmlDoc.getElementsByTagName("parsererror").length){if("image/svg+xml"===typeEl.type){const scriptElem=xmlDoc.createElementNS("http://www.w3.org/2000/svg","script");scriptElem.setAttributeNS(null,"type","application/ecmascript"),scriptElem.innerHTML=`(${hookGeo})();`,xmlDoc.documentElement.insertBefore(scriptElem,xmlDoc.documentElement.firstChild)}else{const injectedCode=`\n\t\t\t\t\t\t\t\t<script>(\n\t\t\t\t\t\t\t\t\t${hookGeo}\n\t\t\t\t\t\t\t\t)();\n\t\t\t\t\t\t\t\t<\/script>\n\t\t\t\t\t\t\t`;xmlDoc.documentElement.insertAdjacentHTML("afterbegin",injectedCode)}!0===mimeType.useXMLparser?args[0]=[(new XMLSerializer).serializeToString(xmlDoc)]:args[0][0]=xmlDoc.documentElement.outerHTML}}}return((constructor,args)=>{const bind=Function.bind;return new(bind.bind(bind)(constructor,null).apply(null,args))})(_Blob,args)}let propNames=Object.getOwnPropertyNames(_Blob);for(let i=0;i<propNames.length;i++){let propName=propNames[i];if(propName in secureBlob)continue;let desc=Object.getOwnPropertyDescriptor(_Blob,propName);Object.defineProperty(secureBlob,propName,desc)}return secureBlob.prototype=_Blob.prototype,secureBlob}(Blob),"undefined"!=typeof chrome?setInterval((()=>{chrome.runtime.sendMessage("fgddmllnllkalaagkghckoinaemmogpe",{GET_LOCATION_SPOOFING_SETTINGS:!0},(response=>{updateHookedObj(response)}))}),500):void 0!==eventName&&document.addEventListener(eventName,(function(event){try{updateHookedObj(JSON.parse(event.detail))}catch(ex){}}))}
+								)();
+								</script>
+							<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>What Would Hobbes Do? – Multi‑Question</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #0f172a;
+      --panel: #f8fafc;
+      --panel-fg: #0f172a;
+      --panel-border: #e5e7eb;
+      --accent: #2563eb;
+      --muted: #6b7280;
+      color-scheme: light dark;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1220;
+        --fg: #e5e7eb;
+        --panel: #111827;
+        --panel-fg: #f9fafb;
+        --panel-border: #374151;
+        --accent: #3b82f6;
+        --muted: #9ca3af;
+      }
+    }
+
+    /* Utilities */
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; background: var(--bg); color: var(--fg); margin: 2rem; line-height: 1.6; }
+
+    .app { max-width: 780px; margin: 0 auto; }
+
+    .card { background: var(--panel); color: var(--panel-fg); border: 1px solid var(--panel-border); border-radius: 14px; padding: 1.25rem; }
+
+    h1 { font-size: 1.6rem; margin: 0 0 0.5rem; }
+    p.lede { color: var(--muted); margin-top: 0; }
+
+    .progress { display: flex; align-items: center; gap: .75rem; margin: 1rem 0; }
+    .bar { height: 8px; flex: 1; background: var(--panel-border); border-radius: 999px; overflow: hidden; }
+    .bar > span { display: block; height: 100%; width: 0%; background: var(--accent); transition: width .25s ease; }
+    .count { font-variant-numeric: tabular-nums; color: var(--muted); }
+
+    .question { font-weight: 700; margin: 1rem 0 .5rem; }
+
+    .options { margin-top: .25rem; }
+    .option { display: block; margin: 0.5rem 0; padding: 0.75rem 1rem; border: 1px solid var(--panel-border); border-radius: 10px; background: var(--panel); color: var(--panel-fg); cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; position: relative; }
+    .option:hover { filter: brightness(1.06); }
+    .option input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+    .option.selected { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+
+    .nav { display: flex; gap: .5rem; justify-content: space-between; margin-top: 1rem; }
+    .nav .left, .nav .right { display: flex; gap: .5rem; }
+    button { appearance: none; border: 1px solid var(--panel-border); background: var(--panel); color: var(--panel-fg); padding: .6rem .9rem; border-radius: 10px; cursor: pointer; font-weight: 600; }
+    button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    button:disabled { opacity: .5; cursor: not-allowed; }
+
+    .summary { margin-top: 1rem; }
+    .summary h2 { font-size: 1.2rem; margin-bottom: .5rem; }
+    .summary-item { border-top: 1px solid var(--panel-border); padding: .75rem 0; }
+    .summary-item:last-child { border-bottom: 1px solid var(--panel-border); }
+    .label { display: inline-block; min-width: 1.75rem; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="card">
+      <h1>What Would Hobbes Do?</h1>
+      <p class="lede">Six short scenarios. Pick the most Hobbes‑aligned policy response. Navigate with Next/Prev. Finish to see a summary of your choices.</p>
+
+      <div class="progress" aria-live="polite">
+        <div class="bar" aria-hidden="true"><span id="bar"></span></div>
+        <div class="count"><span id="idx">1</span>/<span id="total">6</span></div>
+      </div>
+
+      <div id="screen">
+        <!-- JS injects question + options here -->
+      </div>
+
+      <div class="nav">
+        <div class="left">
+          <button id="prevBtn">◀ Prev</button>
+        </div>
+        <div class="right">
+          <button id="nextBtn" class="primary">Next ▶</button>
+          <button id="finishBtn" class="primary" style="display:none">Finish ✓</button>
+        </div>
+      </div>
+
+      <div id="summary" class="summary" hidden="">
+        <h2>Your choices</h2>
+        <div id="summaryList"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        q: "Pandemic ordinance vs. mass protest: what should the sovereign do?",
+        options: [
+          "Allow all protests; any restriction is tyranny.",
+          "Permit protests but require masks/spacing; limit crowd size to preserve life.",
+          "Ban all gatherings until the emergency ends; enforce with penalties.",
+          "Crowd‑source decisions online; voluntary compliance only."
+        ]
+      },
+      {
+        q: "Disinformation destabilises the city. What is the Hobbesian response?",
+        options: [
+          "Absolute freedom of speech, no matter the consequences.",
+          "Central authority defines and enforces clear laws against harmful falsehoods.",
+          "Let platforms self‑regulate; state stays neutral.",
+          "Punish critics personally to deter dissent in future."
+        ]
+      },
+      {
+        q: "Three militias claim jurisdiction over the same region.",
+        options: [
+          "Negotiate a rotating sovereignty among militias.",
+          "Establish one recognised, indivisible sovereign with monopoly on force.",
+          "Disband all forces; rely on citizen virtue.",
+          "Let markets pick winners; no formal authority."
+        ]
+      },
+      {
+        q: "A famine triggers looting across towns.",
+        options: [
+          "Suspend property laws entirely; survival justifies all acts.",
+          "Deploy force to restore order and centrally coordinate food distribution.",
+          "Ask communities to self‑organise aid; no coercion.",
+          "Sell protection contracts to the highest bidders."
+        ]
+      },
+      {
+        q: "A court and a governor issue conflicting orders.",
+        options: [
+          "Let both orders stand; pluralism is healthy.",
+          "Clarify supremacy: one final authority decides to prevent conflict.",
+          "Crowd vote each case online in real time.",
+          "Abolish all courts; personal honour settles disputes."
+        ]
+      },
+      {
+        q: "Online forum spirals into threats and doxxing.",
+        options: [
+          "Trust the community to self‑moderate.",
+          "Appoint moderators with clear rules and real penalties; enforce consistently.",
+          "Delete the forum entirely; silence all users forever.",
+          "Ignore it; words are harmless."
+        ]
+      }
+    ];
+
+    const screen = document.getElementById('screen');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const finishBtn = document.getElementById('finishBtn');
+    const bar = document.getElementById('bar');
+    const idxEl = document.getElementById('idx');
+    const totalEl = document.getElementById('total');
+    const summary = document.getElementById('summary');
+    const summaryList = document.getElementById('summaryList');
+
+    totalEl.textContent = String(questions.length);
+
+    let i = 0;
+    const answers = new Array(questions.length).fill(null);
+
+    function render() {
+      const { q, options } = questions[i];
+      idxEl.textContent = String(i + 1);
+      const pct = ((i) / (questions.length - 1)) * 100;
+      bar.style.width = pct + '%';
+
+      screen.innerHTML = `
+        <div class="question">${q}</div>
+        <div class="options" role="radiogroup" aria-label="Choices">
+          ${options.map((text, k) => {
+            const checked = answers[i] === k;
+            const cls = 'option' + (checked ? ' selected' : '');
+            const id = `q${i}_opt${k}`;
+            return `
+              <label class="${cls}" for="${id}">
+                <input id="${id}" type="radio" name="q${i}" value="${k}" ${checked ? 'checked' : ''} />
+                <span class="label">${String.fromCharCode(65 + k)}.</span> ${text}
+              </label>`;
+          }).join('')}
+        </div>`;
+
+      // Bind click handlers
+      screen.querySelectorAll('.option').forEach((opt, k) => {
+        opt.addEventListener('click', () => {
+          answers[i] = k; // store selection
+          // update selected styles
+          screen.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          const input = opt.querySelector('input');
+          if (input) input.checked = true;
+        });
+      });
+
+      // nav button states
+      prevBtn.disabled = i === 0;
+      nextBtn.style.display = (i < questions.length - 1) ? 'inline-block' : 'none';
+      finishBtn.style.display = (i === questions.length - 1) ? 'inline-block' : 'none';
+
+      summary.hidden = true;
+      summaryList.innerHTML = '';
+    }
+
+    prevBtn.addEventListener('click', () => { if (i > 0) { i--; render(); } });
+    nextBtn.addEventListener('click', () => { if (i < questions.length - 1) { i++; render(); } });
+
+    finishBtn.addEventListener('click', () => {
+      // Show summary with user choices (no scoring)
+      summary.hidden = false;
+      summaryList.innerHTML = questions.map(({ q, options }, idx) => {
+        const pick = answers[idx];
+        const text = (pick === null) ? '<em>No choice selected</em>' : `${String.fromCharCode(65 + pick)}. ${options[pick]}`;
+        return `<div class="summary-item"><div class="question">${idx + 1}. ${q}</div><div><strong>Your choice:</strong> ${text}</div></div>`;
+      }).join('');
+      // Jump view to summary
+      summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    render();
+  </script>
+
+
+</body></html>
